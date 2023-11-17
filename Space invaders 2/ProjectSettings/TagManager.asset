@@ -5,14 +5,18 @@ TagManager:
   serializedVersion: 2
   tags:
   - Platform
+  - Patrolling_Enemy
+  - Attacking_Enemy
+  - Point_1
+  - Point_2
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Player
   - Water
   - UI
-  - 
+  - Enemy
   - 
   - 
   - 

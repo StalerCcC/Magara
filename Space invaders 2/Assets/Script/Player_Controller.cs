@@ -11,21 +11,31 @@ using Input = UnityEngine.Input;
 
 public class Player_Controller : MonoBehaviour
 {
+    public Transform attackpoint;
+    public LayerMask enemy;
     public static Player_Controller instance;
-    public Rigidbody2D rb ;
-    private float horizontal;
+    public Rigidbody2D rb ;   
     Vector3 direction;
-    bool face_right;
+    private float horizontal;
     public float jump_force;
     public float speed;
     public float expulsion;
     public float expulsion_direction=1;
-    bool jump = true;
+    public float roll_duration;
+    public float roll_force;
+    private float rollCurrentTime;
+    public float roll_direction;
+    public float attack_range;
+    public float damage=40;
+    
     Animator anim;
     public bool canRecieveInput= true;
     public bool InputReceived;
-
+    public bool jump = true;
     public bool idle;
+
+    public bool m_rolling;
+    bool face_right;
 
     private void Start()
     {
@@ -48,9 +58,20 @@ public class Player_Controller : MonoBehaviour
         {
              rb.velocity = new Vector3(0,rb.velocity.y,0);
         }
-        if (Input.GetKeyDown(KeyCode.LeftShift))
+        if (m_rolling==true)
         {
-            
+            rollCurrentTime +=Time.deltaTime;
+        }
+        if (rollCurrentTime>roll_duration)
+        {
+            m_rolling=false;
+        }
+        if (Input.GetKeyDown(KeyCode.LeftShift)&&m_rolling==false)
+        {
+            anim.SetTrigger("Roll");
+            rollCurrentTime=0;
+            rb.velocity=new Vector2(expulsion_direction*roll_force,rb.velocity.y);
+            m_rolling=true;
         }
 
         if (Input.GetKeyDown(KeyCode.Space)&jump==true)
@@ -91,6 +112,7 @@ public class Player_Controller : MonoBehaviour
                 InputReceived=true;
                 anim.SetBool("Attack",true);
                 canRecieveInput = false;
+                Attack();
                 
             }
             else
@@ -115,11 +137,12 @@ public class Player_Controller : MonoBehaviour
             anim.SetBool("Fall",false);
             anim.SetBool("Jump",false); 
         }
+
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Platform")
+        if (collision.gameObject.tag == "Platform"||collision.gameObject.tag == "Enemy")
         {
             jump=true;
         }
@@ -133,22 +156,23 @@ public class Player_Controller : MonoBehaviour
         gameObject.transform.localScale = direction;
     }
     
-    public void Attack(InputAction.CallbackContext context)
+    
+
+    public void Attack()
     {
-        if (context.performed)
+        Collider2D[] hit_enemies=Physics2D.OverlapCircleAll(attackpoint.position,attack_range,enemy);
+        foreach (Collider2D Enemy in hit_enemies)
         {
-            if (canRecieveInput)
+            if (Enemy.GetComponent<Enemy_Controller>().current_health>0)
             {
-                InputReceived=true;
-                canRecieveInput = false;
+                Enemy.GetComponent<Enemy_Controller>().Take_Damage(damage);
+                Enemy.GetComponent<Enemy_Controller>().rb.AddForce(new Vector2(expulsion*expulsion_direction,0));
             }
-            else
-            {
-                return;
-            }
+            
         }
     }
-
+    
+    
     public void InputManager()
     {
         if (!canRecieveInput)

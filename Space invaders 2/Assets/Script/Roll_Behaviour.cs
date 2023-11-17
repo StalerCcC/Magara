@@ -2,38 +2,33 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Attack_1_Behaviour : StateMachineBehaviour
+public class Roll_Behaviour : StateMachineBehaviour
 {
+    float roll_direction;
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        Player_Controller.instance.canRecieveInput=true;
-       
-       animator.SetBool("Attack",true);
-       
-       if (Player_Controller.instance.rb.velocity.y==0)
-       {
-        Player_Controller.instance.idle=false;
-        Player_Controller.instance.Attack_expulsion();
-       }
-       else
-       {
-        Player_Controller.instance.idle=true;
-       } 
-       
+        if (Player_Controller.instance.expulsion_direction==1)
+        {
+            roll_direction=1;
+        }
+        else
+        {
+            roll_direction=-1;
+        }
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
-    //override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    {
+        Player_Controller.instance.rb.velocity=new Vector2(roll_direction*Player_Controller.instance.roll_force,Player_Controller.instance.rb.velocity.y);
+    }
+
+    // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
+    //override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     //{
     //    
     //}
-
-    // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
-    override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    {
-        
-    }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()
     //override public void OnStateMove(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
