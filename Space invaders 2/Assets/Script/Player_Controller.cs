@@ -36,6 +36,7 @@ public class Player_Controller : MonoBehaviour
     public bool InputReceived;
     public bool jump = true;
     public bool idle;
+    public bool attacking;
 
     public bool m_rolling;
     bool face_right;
@@ -59,7 +60,7 @@ public class Player_Controller : MonoBehaviour
         {
             rb.velocity = new Vector3(horizontal * speed* Time.deltaTime ,rb.velocity.y,0);
         }
-        else
+        else if(!idle)
         {
              rb.velocity = new Vector3(0,rb.velocity.y,0);
         }
@@ -168,6 +169,13 @@ public class Player_Controller : MonoBehaviour
         Collider2D[] hit_enemies=Physics2D.OverlapCircleAll(attackpoint.position,attack_range,enemy);
         foreach (Collider2D Enemy in hit_enemies)
         {
+            if (Enemy.GetComponent<Falling_Enemy_Controller>().current_health>0)
+            {
+                Enemy.GetComponent<Falling_Enemy_Controller>().current_attack_time=0;
+                Enemy.GetComponent<Falling_Enemy_Controller>().Flap();
+                Enemy.GetComponent<Falling_Enemy_Controller>().Take_Damage(damage);
+                Enemy.GetComponent<Falling_Enemy_Controller>().rb.AddForce(new Vector2(attack_expulsion*expulsion_direction,0));
+            }
             if (Enemy.GetComponent<Enemy_Controller>().current_health>0)
             {
                 Enemy.GetComponent<Enemy_Controller>().current_attack_time=0;
@@ -175,6 +183,7 @@ public class Player_Controller : MonoBehaviour
                 Enemy.GetComponent<Enemy_Controller>().Take_Damage(damage);
                 Enemy.GetComponent<Enemy_Controller>().rb.AddForce(new Vector2(attack_expulsion*expulsion_direction,0));
             }
+            
             
         }
     }

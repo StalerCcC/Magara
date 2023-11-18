@@ -32,7 +32,7 @@ public class Attack_1_Behaviour : StateMachineBehaviour
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        
+        Player_Controller.instance.idle=true;
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()

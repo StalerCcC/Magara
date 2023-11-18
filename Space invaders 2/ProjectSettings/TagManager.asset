@@ -9,6 +9,7 @@ TagManager:
   - Attacking_Enemy
   - Point_1
   - Point_2
+  - enemy_pendulum
   layers:
   - Default
   - TransparentFX
