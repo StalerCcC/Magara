@@ -11,6 +11,7 @@ using Input = UnityEngine.Input;
 
 public class Player_Controller : MonoBehaviour
 {
+    AudioSource audios;
     public Transform attackpoint;
     public LayerMask enemy;
     public static Player_Controller instance;
@@ -43,6 +44,8 @@ public class Player_Controller : MonoBehaviour
 
     private void Start()
     {
+        Application.targetFrameRate=60;
+        audios = gameObject.GetComponent<AudioSource>();
         instance = this;
         rb = gameObject.GetComponent<Rigidbody2D>();
         direction = gameObject.transform.localScale;
@@ -53,6 +56,7 @@ public class Player_Controller : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
+        Foot_Steps();
 
         horizontal = Input.GetAxisRaw("Horizontal");
 
@@ -143,7 +147,7 @@ public class Player_Controller : MonoBehaviour
             anim.SetBool("Fall",false);
             anim.SetBool("Jump",false); 
         }
-
+        
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -160,6 +164,18 @@ public class Player_Controller : MonoBehaviour
         direction = gameObject.transform.localScale;
         direction.x *= -1;
         gameObject.transform.localScale = direction;
+    }
+
+    void Foot_Steps()
+    {
+        if (jump&&rb.velocity.x!=0)
+        {
+            audios.Play();
+        }
+        else
+        {
+            audios.Stop();
+        }
     }
     
     
