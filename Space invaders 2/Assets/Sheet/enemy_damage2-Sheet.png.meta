@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: e83216be734a46042a8b2a81003a63b7
+guid: 9033319aec858b74c9298217215d3d24
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -149,7 +149,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: enemy_jump-Sheet_0
+      name: enemy_damage2-Sheet_0
       rect:
         serializedVersion: 2
         x: 0
@@ -163,14 +163,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fbddbebb272070940a5363800daecfd4
-      internalID: 2081261017
+      spriteID: 610b32324a40deb45a4c1e7e171add26
+      internalID: 1265131034
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: enemy_jump-Sheet_1
+      name: enemy_damage2-Sheet_1
       rect:
         serializedVersion: 2
         x: 128
@@ -184,14 +184,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4d43dd304eefa0045aa20fb7a0f296ef
-      internalID: -652137525
+      spriteID: e2086e25d8ff29549b7fd60e923f3c0a
+      internalID: 1653052871
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: enemy_jump-Sheet_2
+      name: enemy_damage2-Sheet_2
       rect:
         serializedVersion: 2
         x: 256
@@ -205,14 +205,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 81a5dd97969044a4fbde2bf67cf97db3
-      internalID: -1014549123
+      spriteID: 63d446d30934ec14087e4e444771ecca
+      internalID: 1243059114
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: enemy_jump-Sheet_3
+      name: enemy_damage2-Sheet_3
       rect:
         serializedVersion: 2
         x: 384
@@ -226,14 +226,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1ed330a9f335e1a4995b06bd5aac77bd
-      internalID: 619468722
+      spriteID: 1e9b672ec1418164ca2c0970ca993300
+      internalID: 1249925105
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: enemy_jump-Sheet_4
+      name: enemy_damage2-Sheet_4
       rect:
         serializedVersion: 2
         x: 512
@@ -247,14 +247,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c00130af59f3ae14ea4603fd7e91a4fc
-      internalID: 1760354040
+      spriteID: e04554c7d7c0eda4abecf92a6920e025
+      internalID: -783207193
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: enemy_jump-Sheet_5
+      name: enemy_damage2-Sheet_5
       rect:
         serializedVersion: 2
         x: 640
@@ -268,14 +268,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d7d93d449f6a1e145881cbf7c26fc0bc
-      internalID: 98765901
+      spriteID: 74891e15341c27a4898f7a6cad0af18d
+      internalID: -2114356550
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: enemy_jump-Sheet_6
+      name: enemy_damage2-Sheet_6
       rect:
         serializedVersion: 2
         x: 768
@@ -289,14 +289,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 04dba5ce53cd9ef4daaf13179a47a8e3
-      internalID: -1266201467
+      spriteID: 7098073e0a0371547b1870670229e9bc
+      internalID: 2063883848
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: enemy_jump-Sheet_7
+      name: enemy_damage2-Sheet_7
       rect:
         serializedVersion: 2
         x: 896
@@ -310,8 +310,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ae6e396d0b4e2694da75a07b57bf30f9
-      internalID: 1805633070
+      spriteID: 28626c5edbfd2cf42b06c892ebfc2a70
+      internalID: 759956491
       vertices: []
       indices: 
       edges: []
@@ -327,14 +327,14 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      enemy_jump-Sheet_0: 2081261017
-      enemy_jump-Sheet_1: -652137525
-      enemy_jump-Sheet_2: -1014549123
-      enemy_jump-Sheet_3: 619468722
-      enemy_jump-Sheet_4: 1760354040
-      enemy_jump-Sheet_5: 98765901
-      enemy_jump-Sheet_6: -1266201467
-      enemy_jump-Sheet_7: 1805633070
+      enemy_damage2-Sheet_0: 1265131034
+      enemy_damage2-Sheet_1: 1653052871
+      enemy_damage2-Sheet_2: 1243059114
+      enemy_damage2-Sheet_3: 1249925105
+      enemy_damage2-Sheet_4: -783207193
+      enemy_damage2-Sheet_5: -2114356550
+      enemy_damage2-Sheet_6: 2063883848
+      enemy_damage2-Sheet_7: 759956491
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

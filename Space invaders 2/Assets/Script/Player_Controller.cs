@@ -71,7 +71,7 @@ public class Player_Controller : MonoBehaviour
         {
             m_rolling=false;
         }
-        if (Input.GetKeyDown(KeyCode.LeftShift)&&m_rolling==false)
+        if (Input.GetKeyDown(KeyCode.LeftShift)&&m_rolling==false&&jump)
         {
             gameObject.layer=0;
             anim.SetTrigger("Roll");
@@ -82,18 +82,17 @@ public class Player_Controller : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space)&jump==true)
         {
-            Debug.Log("Space");
             jump =false;
             rb.AddForce(new Vector2(0,jump_force));
         }
 
         if (horizontal==1&face_right==true)
         {
-            Flap();
+            Flaping();
         }
         if (horizontal==-1&face_right==false)
         {
-            Flap();
+            Flaping();
         }
 
         if (horizontal==1)
@@ -154,7 +153,7 @@ public class Player_Controller : MonoBehaviour
         }
     }
     
-    void Flap()
+    void Flaping()
     {
         face_right = !face_right;
         direction = gameObject.transform.localScale;
@@ -172,6 +171,7 @@ public class Player_Controller : MonoBehaviour
             if (Enemy.GetComponent<Enemy_Controller>().current_health>0)
             {
                 Enemy.GetComponent<Enemy_Controller>().current_attack_time=0;
+                Enemy.GetComponent<Enemy_Controller>().Flap();
                 Enemy.GetComponent<Enemy_Controller>().Take_Damage(damage);
                 Enemy.GetComponent<Enemy_Controller>().rb.AddForce(new Vector2(attack_expulsion*expulsion_direction,0));
             }

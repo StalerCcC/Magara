@@ -2,9 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy_Death_Behaviour : StateMachineBehaviour
+public class Enemy_Attack_Behaviour : StateMachineBehaviour
 {
-    public GameObject enemy;
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     //override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     //{
@@ -20,7 +19,7 @@ public class Enemy_Death_Behaviour : StateMachineBehaviour
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        Destroy(enemy);
+        Enemy_Controller.instance.Attack();
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()
