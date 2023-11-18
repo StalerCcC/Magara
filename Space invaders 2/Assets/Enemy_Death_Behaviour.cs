@@ -2,32 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Roll_Behaviour : StateMachineBehaviour
+public class Enemy_Death_Behaviour : StateMachineBehaviour
 {
-    float roll_direction;
+    public GameObject enemy;
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
-    override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    {
-        if (Player_Controller.instance.expulsion_direction==1)
-        {
-            roll_direction=1;
-        }
-        else
-        {
-            roll_direction=-1;
-        }
-    }
+    //override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    //{
+    //    
+    //}
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
-    override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    {
-        Player_Controller.instance.rb.velocity=new Vector2(roll_direction*Player_Controller.instance.roll_force,Player_Controller.instance.rb.velocity.y);
-    }
+    //override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    //{
+    //    
+    //}
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        Player_Controller.instance.gameObject.layer=3;
+        Destroy(enemy);
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()

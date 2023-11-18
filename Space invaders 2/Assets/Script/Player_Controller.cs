@@ -19,6 +19,7 @@ public class Player_Controller : MonoBehaviour
     private float horizontal;
     public float jump_force;
     public float speed;
+    public float attack_expulsion;
     public float expulsion;
     public float expulsion_direction=1;
     public float roll_duration;
@@ -27,6 +28,8 @@ public class Player_Controller : MonoBehaviour
     public float roll_direction;
     public float attack_range;
     public float damage=40;
+    public float max_health;
+    public float current_health;
     
     Animator anim;
     public bool canRecieveInput= true;
@@ -43,11 +46,13 @@ public class Player_Controller : MonoBehaviour
         rb = gameObject.GetComponent<Rigidbody2D>();
         direction = gameObject.transform.localScale;
         anim = gameObject.GetComponent<Animator>();
+        current_health=max_health;
     }
 
     // Update is called once per frame
     private void Update()
     {
+
         horizontal = Input.GetAxisRaw("Horizontal");
 
         if (idle==true)
@@ -68,6 +73,7 @@ public class Player_Controller : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.LeftShift)&&m_rolling==false)
         {
+            gameObject.layer=0;
             anim.SetTrigger("Roll");
             rollCurrentTime=0;
             rb.velocity=new Vector2(expulsion_direction*roll_force,rb.velocity.y);
@@ -165,11 +171,28 @@ public class Player_Controller : MonoBehaviour
         {
             if (Enemy.GetComponent<Enemy_Controller>().current_health>0)
             {
+                Enemy.GetComponent<Enemy_Controller>().current_attack_time=0;
                 Enemy.GetComponent<Enemy_Controller>().Take_Damage(damage);
-                Enemy.GetComponent<Enemy_Controller>().rb.AddForce(new Vector2(expulsion*expulsion_direction,0));
+                Enemy.GetComponent<Enemy_Controller>().rb.AddForce(new Vector2(attack_expulsion*expulsion_direction,0));
             }
             
         }
+    }
+    public void Take_Damage(float damage)
+    {
+        
+            anim.SetTrigger("Hurt");
+            current_health -= damage;
+        
+        
+        if (current_health<=0)
+        {
+            Die();
+        }
+    }
+    public void Die()
+    {
+        anim.SetBool("Death", true);
     }
     
     
