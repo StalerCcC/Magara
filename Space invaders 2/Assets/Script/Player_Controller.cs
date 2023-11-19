@@ -11,9 +11,12 @@ using Input = UnityEngine.Input;
 
 public class Player_Controller : MonoBehaviour
 {
-    AudioSource audios;
+    public AudioSource audios;
+    public AudioSource audios_5;
+    public AudioSource audios_6;
     public Transform attackpoint;
     public LayerMask enemy;
+    public LayerMask enemy_1;
     public static Player_Controller instance;
     public Rigidbody2D rb ;   
     Vector3 direction;
@@ -27,6 +30,8 @@ public class Player_Controller : MonoBehaviour
     public float roll_force;
     private float rollCurrentTime;
     public float roll_direction;
+    public float roll_anim,_time;
+    public float roll_anim_duration;
     public float attack_range;
     public float damage=40;
     public float max_health;
@@ -38,6 +43,7 @@ public class Player_Controller : MonoBehaviour
     public bool jump = true;
     public bool idle;
     public bool attacking;
+    public bool fall_audio;
 
     public bool m_rolling;
     bool face_right;
@@ -56,7 +62,7 @@ public class Player_Controller : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        Foot_Steps();
+        
 
         horizontal = Input.GetAxisRaw("Horizontal");
 
@@ -81,12 +87,18 @@ public class Player_Controller : MonoBehaviour
             gameObject.layer=0;
             anim.SetTrigger("Roll");
             rollCurrentTime=0;
-            rb.velocity=new Vector2(expulsion_direction*roll_force,rb.velocity.y);
             m_rolling=true;
         }
+        if (fall_audio)
+        {
+            audios_5.Play();
+            fall_audio=false;
+        }
+ 
 
         if (Input.GetKeyDown(KeyCode.Space)&jump==true)
         {
+            audios_6.Play();
             jump =false;
             rb.AddForce(new Vector2(0,jump_force));
         }
@@ -154,7 +166,9 @@ public class Player_Controller : MonoBehaviour
     {
         if (collision.gameObject.tag == "Platform"||collision.gameObject.tag == "Enemy")
         {
+            
             jump=true;
+            fall_audio=true;
         }
     }
     
@@ -165,33 +179,30 @@ public class Player_Controller : MonoBehaviour
         direction.x *= -1;
         gameObject.transform.localScale = direction;
     }
-
-    void Foot_Steps()
-    {
-        if (jump&&rb.velocity.x!=0)
-        {
-            audios.Play();
-        }
-        else
-        {
-            audios.Stop();
-        }
-    }
     
     
 
     public void Attack()
     {
-        Collider2D[] hit_enemies=Physics2D.OverlapCircleAll(attackpoint.position,attack_range,enemy);
+        Collider2D[] hit_enemies=Physics2D.OverlapCircleAll(attackpoint.position,attack_range,enemy_1);
         foreach (Collider2D Enemy in hit_enemies)
         {
+            
             if (Enemy.GetComponent<Falling_Enemy_Controller>().current_health>0)
             {
-                Enemy.GetComponent<Falling_Enemy_Controller>().current_attack_time=0;
+                Enemy.GetComponent<Falling_Enemy_Controller>().current_attack_time=-0.75f;
                 Enemy.GetComponent<Falling_Enemy_Controller>().Flap();
                 Enemy.GetComponent<Falling_Enemy_Controller>().Take_Damage(damage);
                 Enemy.GetComponent<Falling_Enemy_Controller>().rb.AddForce(new Vector2(attack_expulsion*expulsion_direction,0));
             }
+            
+              
+        }
+        Collider2D[] hit_enemy=Physics2D.OverlapCircleAll(attackpoint.position,attack_range,enemy);
+        foreach (Collider2D Enemy in hit_enemy)
+        {
+            
+            
             if (Enemy.GetComponent<Enemy_Controller>().current_health>0)
             {
                 Enemy.GetComponent<Enemy_Controller>().current_attack_time=0;
@@ -199,9 +210,9 @@ public class Player_Controller : MonoBehaviour
                 Enemy.GetComponent<Enemy_Controller>().Take_Damage(damage);
                 Enemy.GetComponent<Enemy_Controller>().rb.AddForce(new Vector2(attack_expulsion*expulsion_direction,0));
             }
-            
-            
+              
         }
+        
     }
     public void Take_Damage(float damage)
     {
