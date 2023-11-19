@@ -29,8 +29,8 @@ public class Player_Controller : MonoBehaviour
     public float roll_duration;
     public float roll_force;
     private float rollCurrentTime;
-    public float roll_direction;
-    public float roll_anim,_time;
+    public float speed_2;
+    public float roll_anim_time;
     public float roll_anim_duration;
     public float attack_range;
     public float damage=40;
@@ -42,7 +42,7 @@ public class Player_Controller : MonoBehaviour
     public bool InputReceived;
     public bool jump = true;
     public bool idle;
-    public bool attacking;
+    public bool rolling;
     public bool fall_audio;
 
     public bool m_rolling;
@@ -66,7 +66,7 @@ public class Player_Controller : MonoBehaviour
 
         horizontal = Input.GetAxisRaw("Horizontal");
 
-        if (idle==true)
+        if (idle==true&&!rolling)
         {
             rb.velocity = new Vector3(horizontal * speed* Time.deltaTime ,rb.velocity.y,0);
         }
@@ -84,10 +84,12 @@ public class Player_Controller : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.LeftShift)&&m_rolling==false&&jump)
         {
+            rolling=true;
             gameObject.layer=0;
             anim.SetTrigger("Roll");
             rollCurrentTime=0;
             m_rolling=true;
+
         }
         if (fall_audio)
         {

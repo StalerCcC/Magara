@@ -8,6 +8,7 @@ using UnityEngine;
 
 public class Enemy_Controller : MonoBehaviour
 {
+    public AudioSource audios;
     public LayerMask Main_Character;
     public LayerMask roll_anim;
     public static Enemy_Controller instance;
@@ -37,6 +38,7 @@ public class Enemy_Controller : MonoBehaviour
     public float jump_forcey;
     public float patrolling_speed;
     public float jumping_direction;
+    public float jumping_height;
     public bool  jump;
     public bool face_right;
     public bool is_attacking;
@@ -44,6 +46,7 @@ public class Enemy_Controller : MonoBehaviour
     public bool attacking;
     public bool attack_anim;
     public bool can_jump;
+    public bool jump_anim;
 
 
 
@@ -66,7 +69,7 @@ public class Enemy_Controller : MonoBehaviour
                 {
  
                     Enemy.GetComponent<Player_Controller>().Take_Damage(damage);
-                    Enemy.GetComponent<Player_Controller>().rb.AddForce(new Vector2(expulsion*expulsion_direction,0));
+                    Enemy.GetComponent<Player_Controller>().rb.AddForce(new Vector2(expulsion*jumping_direction,0));
                     
                 }
             
@@ -84,6 +87,7 @@ public class Enemy_Controller : MonoBehaviour
                 jump=false;
                 can_jump=false;
                 is_chasing=true;
+                
             
             }   
         if ( Math.Abs(Player.position.x - transform.position.x) <= jump_range&&jump==true)
@@ -94,11 +98,18 @@ public class Enemy_Controller : MonoBehaviour
             jump_anim_time += Time.deltaTime;   
             anim.SetTrigger("Jump");
             can_jump=true;
+            jump_anim = true;
             
 
         }
+        if (gameObject.GetComponent<SpriteRenderer>().sprite.name=="enemy_jump-Sheet_2")
+        {
+            //audios.Play();
+        }
         if (jump_anim_time<jump_anim_duration&&can_jump)
         {
+            
+            jump_anim=false;
             rb.velocity=new Vector2(jumping_direction*jump_forcex*Time.deltaTime,0);
         }
         if (jump_anim_time>jump_anim_duration)
@@ -215,10 +226,10 @@ public class Enemy_Controller : MonoBehaviour
                 }
             }
         }
-        if (anim.GetBool("Death"))
+        if (anim.GetBool("Death1"))
         {
             
-            if (current_attack_time>0.65f)
+            if (current_attack_time>0.85f)
         {
             Destroy(gameObject);
         }
@@ -250,7 +261,8 @@ public class Enemy_Controller : MonoBehaviour
     public void Die()
     {
         
-        anim.SetBool("Death", true);
+        anim.SetBool("Death1", true);
+        anim.SetTrigger("Death");
         
 
     }

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class Roll_Behaviour : StateMachineBehaviour
@@ -28,6 +29,7 @@ public class Roll_Behaviour : StateMachineBehaviour
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         Player_Controller.instance.gameObject.layer=3;
+        Player_Controller.instance.rolling=false;
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()

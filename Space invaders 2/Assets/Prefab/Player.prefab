@@ -182,32 +182,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7b870935a5ac3942be7e7eb57557682, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audios: {fileID: 0}
+  audios: {fileID: 5565545473320180857}
+  audios_5: {fileID: 1855658685858811702}
+  audios_6: {fileID: 9017524375408547681}
   attackpoint: {fileID: 4052093281944736428}
   enemy:
     serializedVersion: 2
     m_Bits: 64
+  enemy_1:
+    serializedVersion: 2
+    m_Bits: 256
   rb: {fileID: 1797731822602858133}
-  jump_force: 1000
+  jump_force: 1200
   speed: 500
-  attack_expulsion: 300000
+  attack_expulsion: 350000
   expulsion: 2500
   expulsion_direction: 1
   roll_duration: 2
-  roll_force: 10
-  roll_direction: 0
-  roll_anim: 0
-  _time: 0
+  roll_force: 20
+  speed_2: 0
+  roll_anim_time: 0.8
   roll_anim_duration: 0
   attack_range: 1.5
   damage: 40
-  max_health: 10000
+  max_health: 240
   current_health: 0
   canRecieveInput: 1
   InputReceived: 0
   jump: 1
   idle: 1
-  attacking: 0
+  rolling: 0
+  fall_audio: 0
   m_rolling: 0
 --- !u!95 &6073137631784263269
 Animator:
@@ -333,7 +338,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2903180614054630554}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8f681d78ad1328549a6198c00623e75d, type: 3}
   m_Name: 
@@ -744,8 +749,8 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 508280905fd119248ac8e67bf24a6003, type: 3}
-  m_PlayOnAwake: 1
-  m_Volume: 1
+  m_PlayOnAwake: 0
+  m_Volume: 0.02
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -840,8 +845,8 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 79f07276ed9911d4c94e46b5dc80a393, type: 3}
-  m_PlayOnAwake: 1
-  m_Volume: 1
+  m_PlayOnAwake: 0
+  m_Volume: 0.05
   m_Pitch: 2.15
   Loop: 0
   Mute: 0
@@ -849,7 +854,7 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 1
+  MinDistance: 0.9189782
   MaxDistance: 500
   Pan2D: 0
   rolloffMode: 0
