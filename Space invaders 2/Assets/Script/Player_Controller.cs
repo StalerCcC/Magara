@@ -52,6 +52,7 @@ public class Player_Controller : MonoBehaviour
     private void Start()
     {
         Application.targetFrameRate=60;
+        
         audios = gameObject.GetComponent<AudioSource>();
         instance = this;
         rb = gameObject.GetComponent<Rigidbody2D>();
@@ -59,7 +60,7 @@ public class Player_Controller : MonoBehaviour
         anim = gameObject.GetComponent<Animator>();
         current_health=max_health;
     }
-
+    
     // Update is called once per frame
     private void Update()
     {
@@ -169,15 +170,6 @@ public class Player_Controller : MonoBehaviour
         
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.tag == "Platform"||collision.gameObject.tag == "Enemy")
-        {
-            
-            jump=true;
-            fall_audio=true;
-        }
-    }
     
     void Flaping()
     {
