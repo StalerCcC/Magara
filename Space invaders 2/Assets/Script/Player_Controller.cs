@@ -8,6 +8,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.Windows;
 using UnityEngine.XR;
 using Input = UnityEngine.Input;
+using UnityEngine.SceneManagement;
 
 public class Player_Controller : MonoBehaviour
 {
@@ -62,9 +63,13 @@ public class Player_Controller : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        
+        Application.targetFrameRate=60;
 
         horizontal = Input.GetAxisRaw("Horizontal");
+        if (current_health<=0)
+        {
+            
+        }
 
         if (idle==true&&!rolling)
         {
@@ -230,7 +235,7 @@ public class Player_Controller : MonoBehaviour
     }
     public void Die()
     {
-        anim.SetBool("Death", true);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
     
     
