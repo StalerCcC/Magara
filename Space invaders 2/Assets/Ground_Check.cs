@@ -12,7 +12,7 @@ public class Ground_Check : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collider)
     {
-        if (collider.gameObject.tag=="Platform")
+        if (collider.gameObject.tag=="Platform"||collider.gameObject.tag=="Patrolling_Enemy")
         {
             Player_Controller.instance.jump=true;
             Player_Controller.instance.fall_audio=true;
