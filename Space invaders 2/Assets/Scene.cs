@@ -18,6 +18,10 @@ public class Scene : MonoBehaviour
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex+1);
         }
     }
+    public void Next_Scene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex+1);
+    }
 
     // Update is called once per frame
     void Update()
